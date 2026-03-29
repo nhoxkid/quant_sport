@@ -1,0 +1,73 @@
+====================================================
+DATA QUALITY REPORT — nfl_totals_weather.csv
+Generated: 2026-03-28 20:34:49
+====================================================
+
+SCHEMA:
+  All 33 expected columns present  ✅
+  No unexpected columns  ✅
+
+DTYPES:
+  Key dtypes correct (game_id=str, season=numeric)  ✅
+
+COMPLETENESS:
+  total_points: 100.0% non-null  ✅
+  temperature: 96.8% non-null (outdoor only: 96.8%)  ✅
+  wind_speed: 96.8% non-null (outdoor only: 96.8%)  ✅
+  precipitation: 96.8% non-null (outdoor only: 96.8%)  ✅
+  L_close: 100.0% non-null  ✅
+
+RANGE CHECKS:
+  total_points: min=3, max=105 [0, 120]  ✅
+  L_close: min=28.5, max=63.5 [28, 70]  ✅
+  temperature: min=-14.4, max=38.0 [-40, 45] (outdoor)  ✅
+  wind_speed: min=0.0, max=50.8 [0, 120] (outdoor)  ✅
+  precipitation: min=0.0, max=5.2 [0, 100] (outdoor)  ✅
+  dome_indicator in {0, 1} (found {0, 1})  ✅
+  E_W in {0, 1} (found {0, 1})  ✅
+  E_T in {0, 1} (found {0, 1})  ✅
+  p_over_vigfree in (0,1): min=0.4633, max=0.5379  ✅
+  overround in [0, 0.15]: min=0.0118, max=0.0541  ✅
+
+CONSISTENCY:
+  total_points == home + away: all/1855 rows  ✅
+  Dome games have NaN weather  ✅
+  Outdoor games with weather: 1265/1307 (96.8%)  ✅
+  E_W == 0 for all dome games  ✅
+  E_T == 0 for all dome games  ✅
+  No duplicate game_ids (found 0 dupes)  ✅
+  Games per season >= 200 for all 7 seasons  ✅
+
+DISTRIBUTION SUMMARY:
+  total_points: mean=45.8, std=13.9, min=3.0, max=105.0, median=45.0
+  L_close: mean=45.3, std=4.6, min=28.5, max=63.5, median=45.0
+  temperature: mean=15.2, std=9.1, min=-14.4, max=38.0, median=15.4
+  wind_speed: mean=13.6, std=7.4, min=0.0, max=50.8, median=12.6
+
+  Season counts:
+    2018: 256
+    2019: 256
+    2020: 256
+    2021: 272
+    2022: 271
+    2023: 272
+    2024: 272
+
+  dome_indicator value_counts:
+    0: 1307
+    1: 548
+  E_W value_counts:
+    0: 1640
+    1: 215
+  E_T value_counts:
+    0: 1758
+    1: 97
+
+CROSS-CHECKS:
+  corr(total_points, L_close) = 0.329 (> 0.3)  ✅
+  Mean Jan outdoor temp (7.4°C) < Sep (23.9°C)  ✅
+  Mean total_points = 45.8 (expected ~43-50)  ✅
+  Mean temperature for dome games is NaN  ✅
+
+OVERALL: ✅ 29/29 checks passed (0 warnings)
+====================================================
